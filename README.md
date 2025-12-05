@@ -1,58 +1,30 @@
-# Plinko Game Online 🎮
+# Versflip Plinko
 
-Experience the classic arcade thrill with our free online Plinko game! Drop discs through pegs and watch the excitement unfold.
+A Flask-powered Versflip experience with a pink and purple visual theme. The homepage focuses on a single Plinko board that pays out in the F$ currency. Users can register or log in (including with a `.ROBLOSECURITY` cookie) to keep their F$ balance tied to an account.
 
-## 🎯 [Play Now](https://plinko-game-online.github.io/)
+## Getting started
+1. Create and activate a virtual environment (recommended).
+2. Install dependencies:
+   ```bash
+   pip install -r requirements.txt
+   ```
+3. Run the development server:
+   ```bash
+   python app.py
+   ```
+4. Open http://localhost:5000 to view and play Plinko.
 
-No download, no registration - just instant fun in your browser!
+### Accounts and database
+- A SQLite database (`versflip.db` by default) is created automatically on first request.
+- Use the homepage forms to register (starts with 1,000 F$) or log in with either username/password or a `.ROBLOSECURITY` cookie; balances persist per account.
+- Roblox players can sign in with their `.ROBLOSECURITY` cookie; the value is hashed server-side, linked to their account for future logins, and surfaces their Roblox username and profile link in the UI.
+- Set `VERSFLIP_DB=/custom/path.db` to control where the database is stored.
 
-## ✨ Game Features
+## Gameplay
+- **Balance:** Each account starts with 1000 F$ that update after every play. Guests receive a temporary session balance.
+- **Plinko:** Choose a risk lane (safe, balanced, or risky) and place a bet. The server simulates eight peg rows and lands in one of nine slots using the lane’s multipliers to compute your payout.
 
-- **Instant Play**: Start dropping discs immediately
-- **Mobile Friendly**: Perfect on any device
-- **Free Forever**: No hidden costs
-- **Simple Controls**: Click or tap to drop
-- **Smooth Gameplay**: Built with modern web technology
-
-## 🎲 How to Play
-
-1. Visit [https://plinko-game-online.github.io/](https://plinko-game-online.github.io/)
-2. Click to drop your disc from the top
-3. Watch it bounce through the pegs
-4. Score points based on where it lands
-5. Try different drop positions for better scores!
-
-## 💻 Technical Requirements
-
-- Works on all modern browsers
-- Supports both desktop and mobile
-- No installation needed
-- Minimal internet connection required
-
-## 🌟 Why Players Love Our Plinko
-
-- Clean, simple interface
-- Authentic arcade physics
-- Quick loading time
-- Responsive controls
-- No ads interruption
-
-## 📱 Compatible Browsers
-
-- Google Chrome
-- Firefox
-- Safari
-- Microsoft Edge
-- Mobile browsers
-
-## 🎮 Quick Tips
-
-- Try different dropping positions
-- Watch how the pegs affect disc movement
-- Practice makes perfect!
-
----
-
-Enjoy playing Plinko! Share with friends for more fun.
-
-[Play Plinko Game Now](https://plinko-game-online.github.io/)
+## Design notes
+- Gradient pink and purple palette across buttons, cards, and charts.
+- Versflip logo badge built from text for an easily brandable header.
+- Responsive grid layout for the hero section, chart preview, and featured game cards.

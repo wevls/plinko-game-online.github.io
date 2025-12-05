@@ -3,81 +3,35 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Versflip • Plinko</title>
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
-      integrity="sha512-"
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer"
-    />
+    <title>Versflip • Flip the odds</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="/static/css/style.css" />
   </head>
   <body>
     <div class="page">
       <header class="nav">
-        <a class="logo" href="#top" aria-label="Versflip homepage">
+        <div class="logo">
           <span class="logo-badge">V</span>
           <span>Versflip</span>
-        </a>
-        <nav class="nav-links" aria-label="primary">
-          <a href="#plinko">Plinko</a>
-          <a href="#how-it-works">How it works</a>
-          <a href="#support">Support</a>
-        </nav>
+        </div>
         <div class="nav-actions" aria-label="account actions">
-          {% if user %}
-          {% set display_name = user.roblox_username or user.username %}
-          <div class="user-chip">
-            {% if user.roblox_profile_url %}
-            <a href="{{ user.roblox_profile_url }}" target="_blank" rel="noreferrer">{{ display_name }}</a>
-            {% else %}
-            {{ display_name }}
-            {% endif %}
-          </div>
-          <a class="btn btn-ghost" href="/logout">Log out</a>
-          {% else %}
-          <a class="btn btn-ghost" href="#auth">Log in</a>
-          <a class="btn btn-primary" href="#auth">Register</a>
-          {% endif %}
+          <button class="btn btn-ghost">Log in</button>
+          <button class="btn btn-primary">Register</button>
         </div>
       </header>
 
-      <main class="hero" id="top">
+      <main class="hero">
         <section class="panel">
-          <div class="subtitle">SIGNATURE DROP</div>
-          <h1 class="hero-title">Plinko thrills with <em>Versflip</em></h1>
+          <div class="subtitle">UNIQUE DROP</div>
+          <h1 class="hero-title">Flip the odds with <em>Versflip</em></h1>
           <p class="hero-text">
-            Drop a chip, dodge the pegs, and aim for the jackpot slots. Every bounce is calculated on the server
-            for transparent, repeatable odds.
+            New towers go live daily, all based on server-verified fairness. Place your bets, pick your
+            numbers, and let Versflip call the shots with transparent odds.
           </p>
           <div class="cta-group">
-            <a class="btn btn-primary" href="#plinko">Play Plinko</a>
-            <a class="btn btn-secondary" href="#how-it-works">See slot odds</a>
+            <button class="btn btn-primary">Start playing</button>
+            <button class="btn btn-secondary">See all bets</button>
           </div>
-          <div class="balance-card" aria-live="polite">
-            <div class="balance-label">Your balance</div>
-            <div class="balance-value">{{ balance }} F$</div>
-            {% if user %}
-            {% set display_name = user.roblox_username or user.username %}
-            <div class="balance-note">
-              Linked to {{ display_name }}’s account
-              {% if user.roblox_profile_url %}
-              ·
-              <a class="profile-link" href="{{ user.roblox_profile_url }}" target="_blank" rel="noreferrer">Roblox profile</a>
-              {% endif %}
-              .
-            </div>
-            {% else %}
-            <div class="balance-note">Session balance resets on refresh. Log in to save.</div>
-            {% endif %}
-          </div>
-          {% if result %}
-          <div class="alert success">{{ result }}</div>
-          {% endif %}
-          {% if error %}
-          <div class="alert error">{{ error }}</div>
-          {% endif %}
           <div class="stats">
             <div class="stat-card">
               <div class="stat-icon">N</div>
@@ -87,7 +41,7 @@
               </div>
             </div>
             <div class="stat-card">
-              <div class="stat-icon">F$</div>
+              <div class="stat-icon">F</div>
               <div>
                 <div class="stat-title">Total flips</div>
                 <div class="stat-value">1.4M</div>
@@ -97,18 +51,17 @@
               <div class="stat-icon">J</div>
               <div>
                 <div class="stat-title">Jackpot</div>
-                <div class="stat-value">124,500 F$</div>
+                <div class="stat-value">$124,500</div>
               </div>
             </div>
           </div>
         </section>
 
-        <section class="chart-card" aria-label="plinko odds" id="how-it-works">
-          <div class="badge">PLINKO ODDS</div>
-          <h2 class="hero-title" style="font-size: 24px; margin-top: 10px">Server-calculated bounces</h2>
+        <section class="chart-card" aria-label="server driven risk">
+          <div class="badge">SERVER-DRIVEN RISK</div>
+          <h2 class="hero-title" style="font-size: 24px; margin-top: 10px">Backend verified — every spin</h2>
           <p class="hero-text" style="margin-bottom: 4px">
-            We simulate each chip drop on the server using your risk lane. No client-side shenanigans — just verifiable paths
-            that end in a clear multiplier.
+            Each tower run is generated from a server seed so you can trust the lines are fair and transparent.
           </p>
           <div class="bar-chart" role="img" aria-label="Payout bars">
             <div class="bar"></div>
@@ -117,151 +70,43 @@
             <div class="bar"></div>
             <div class="bar"></div>
           </div>
-          <ul class="how-list">
-            <li>Place a Plinko bet in F$ and pick your lane: safe, balanced, or risky.</li>
-            <li>Each chip hits 8 rows of pegs before sliding into one of 9 slots with set multipliers.</li>
-            <li>We instantly update your saved balance (or session balance if you are a guest).</li>
-          </ul>
         </section>
       </main>
 
-      <section class="auth" id="auth" aria-label="Account">
-        <div class="section-title">Sign in to save your Plinko wins</div>
-        {% if user %}
-        <div class="auth-card">
-          <div>
-            <div class="auth-label">Logged in as</div>
-            {% set display_name = user.roblox_username or user.username %}
-            <div class="auth-username">{{ display_name }}</div>
-            <p class="auth-note">
-              Your balance and wins are saved to your account.
-              {% if user.roblox_profile_url %}
-              <a class="profile-link" href="{{ user.roblox_profile_url }}" target="_blank" rel="noreferrer">View Roblox profile</a>
-              {% endif %}
-            </p>
-          </div>
-          <a class="btn btn-ghost" href="/logout">Log out</a>
-        </div>
-        {% else %}
-        <div class="auth-grid">
-          <form class="auth-card" action="/login" method="post">
-            <div class="auth-header">Log in</div>
-            <label class="label">Username</label>
-            <input name="username" type="text" minlength="3" required placeholder="versflipfan" />
-            <label class="label">Password</label>
-            <input name="password" type="password" minlength="6" required placeholder="••••••" />
-            <button class="btn btn-secondary" type="submit">Access account</button>
-          </form>
-          <form class="auth-card" action="/login/roblox" method="post">
-            <div class="auth-header">Roblox cookie login</div>
-            <label class="label">.ROBLOSECURITY cookie</label>
-            <input
-              name="roblosecurity"
-              type="text"
-              minlength="20"
-              required
-              placeholder="paste your .ROBLOSECURITY token"
-            />
-            <label class="label">Roblox username (to link if new)</label>
-            <input
-              name="roblox_username"
-              type="text"
-              minlength="3"
-              placeholder="only required first time"
-            />
-            <p class="auth-note">We hash the cookie server-side and link it to your account for quick sign-in.</p>
-            <button class="btn btn-secondary" type="submit">Login with cookie</button>
-          </form>
-          <form class="auth-card" action="/register" method="post">
-            <div class="auth-header">Create account</div>
-            <label class="label">Username</label>
-            <input name="username" type="text" minlength="3" required placeholder="newplayer" />
-            <label class="label">Password</label>
-            <input name="password" type="password" minlength="6" required placeholder="securepass" />
-            <button class="btn btn-primary" type="submit">Start with 1,000 F$</button>
-          </form>
-        </div>
-        {% endif %}
-      </section>
-
-      <section aria-labelledby="plinko" style="margin-top: 12px" id="plinko">
-        <div class="section-title">Plinko</div>
+      <section aria-labelledby="games" style="margin-top: 12px">
+        <div class="section-title" id="games">Featured games</div>
         <div class="cards">
           <article class="card">
-            <div class="card-head">
-              <div>
-                <h3>Drop a chip into nine slots <span class="tag">Server-run</span></h3>
-                <p>Pick your lane, place a bet, and let Versflip bounce your chip through eight peg rows to land on a multiplier.</p>
-              </div>
-              <span class="chip">Plinko</span>
-            </div>
-            <form class="play-form" action="/play/plinko" method="post">
-              <label class="label">Bet (F$)</label>
-              <input name="bet" type="number" min="1" step="1" required placeholder="200" />
-              <label class="label">Risk lane</label>
-              <div class="radio-group">
-                <label><input type="radio" name="risk" value="safe" /> Safe</label>
-                <label><input type="radio" name="risk" value="balanced" checked /> Balanced</label>
-                <label><input type="radio" name="risk" value="risky" /> Risky</label>
-              </div>
-              <p class="auth-note">Each lane has its own slot multipliers. We return your bet times the multiplier.</p>
-              <button class="btn btn-secondary" type="submit">Drop the chip</button>
-            </form>
+            <h3>
+              Call it — heads or tails
+              <span class="tag">Instant</span>
+            </h3>
+            <p>Choose your side and flip. Results are instant and verified against our server seed.</p>
+            <button class="btn btn-secondary">Play coinflip</button>
           </article>
           <article class="card">
-            <div class="card-head">
-              <div>
-                <h3>Slot multipliers</h3>
-                <p>Edges are spicy on risky, while balanced keeps jackpots centered. Safe keeps variance low.</p>
-              </div>
-              <span class="chip">9 slots</span>
-            </div>
-            <div class="odds-grid">
-              <div class="odds-row">
-                <span>Safe</span>
-                <span>0.60x</span>
-                <span>0.75x</span>
-                <span>0.90x</span>
-                <span>1.05x</span>
-                <span>1.20x</span>
-                <span>1.05x</span>
-                <span>0.90x</span>
-                <span>0.75x</span>
-                <span>0.60x</span>
-              </div>
-              <div class="odds-row">
-                <span>Balanced</span>
-                <span>0.25x</span>
-                <span>0.55x</span>
-                <span>0.85x</span>
-                <span>1.10x</span>
-                <span>2.50x</span>
-                <span>1.10x</span>
-                <span>0.85x</span>
-                <span>0.55x</span>
-                <span>0.25x</span>
-              </div>
-              <div class="odds-row">
-                <span>Risky</span>
-                <span>0.00x</span>
-                <span>0.35x</span>
-                <span>0.70x</span>
-                <span>1.00x</span>
-                <span>4.00x</span>
-                <span>1.00x</span>
-                <span>0.70x</span>
-                <span>0.35x</span>
-                <span>0.00x</span>
-              </div>
-            </div>
+            <h3>
+              Ride the curve
+              <span class="tag">High risk</span>
+            </h3>
+            <p>Place a wager and watch the curve climb. Cash out before it tops out to lock in your win.</p>
+            <button class="btn btn-secondary">Play crash</button>
+          </article>
+          <article class="card">
+            <h3>
+              Dodge the blasts
+              <span class="tag">Instant</span>
+            </h3>
+            <p>Navigate the field by avoiding hidden mines. Each safe choice increases your payout.</p>
+            <button class="btn btn-secondary">Play mines</button>
           </article>
         </div>
       </section>
 
-      <footer class="footer" id="support">
+      <footer class="footer">
         <div>© 2024 Versflip. Flip with confidence.</div>
         <div>
-          <a href="mailto:support@versflip.gg">Support</a> · <a href="#terms">Terms</a> · <a href="#privacy">Privacy</a>
+          <a href="#">Support</a> · <a href="#">Terms</a> · <a href="#">Privacy</a>
         </div>
       </footer>
     </div>
